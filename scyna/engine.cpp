@@ -7,7 +7,7 @@
 #include "generator.h"
 #include "logger.h"
 
-boost::shared_ptr<scyna::Engine> scyna::Engine::instance_;
+scyna::Engine *scyna::Engine::instance_;
 
 size_t writefunc(void *ptr, size_t size, size_t nmemb, std::string *s)
 {
@@ -35,16 +35,34 @@ scyna::Engine::Engine(std::string module, uint64_t sid, const scyna_proto::Confi
 
 scyna::Engine::~Engine()
 {
+    this->release();
+}
+
+void scyna::Engine::release()
+{
     if (connection_ != NULL)
     {
         natsConnection_Destroy(connection_);
+        connection_ = NULL;
     }
-    delete session_;
-    delete id_;
-    delete logger_;
+    if (session_ == NULL)
+    {
+        delete session_;
+        session_ = NULL;
+    }
+    if (id_ == NULL)
+    {
+        delete id_;
+        id_ = NULL;
+    }
+    if (logger_ == NULL)
+    {
+        delete logger_;
+        logger_ = NULL;
+    }
 }
 
-boost::shared_ptr<scyna::Engine> scyna::Engine::instance()
+scyna::Engine *scyna::Engine::instance()
 {
     return instance_;
 }
@@ -81,7 +99,7 @@ void scyna::Engine::Init(std::string managerURL, std::string module, std::string
             scyna_proto::CreateSessionResponse response;
             if (response.ParseFromString(result))
             {
-                instance_.reset(new Engine(module, (uint64_t)response.sessionid(), response.config()));
+                instance_ = new Engine(module, (uint64_t)response.sessionid(), response.config());
                 std::cerr << "Engine created, session:" << response.sessionid() << std::endl;
             }
         }
@@ -111,11 +129,6 @@ void scyna::Engine::start()
     sigIntHandler.sa_flags = 0;
     sigaction(SIGINT, &sigIntHandler, NULL);
     pause();
-}
-
-void scyna::Engine::natsPublish(std::string subject, const char *data, int len)
-{
-    natsConnection_Publish(connection_, subject.c_str(), (const void *)data, len);
 }
 
 boost::shared_ptr<scyna_proto::Response> scyna::Engine::natsRequest(std::string subject, const scyna_proto::Request &request)

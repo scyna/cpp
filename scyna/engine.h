@@ -16,10 +16,10 @@ namespace scyna
     {
     private:
         std::string module_;
-        Session *session_;
-        Generator *id_;
+        Session *session_ = NULL;
+        Generator *id_ = NULL;
         natsConnection *connection_ = NULL;
-        Logger *logger_;
+        Logger *logger_ = NULL;
 
     public:
         Generator *ID() { return id_; }
@@ -29,17 +29,15 @@ namespace scyna
         Logger *logger() { return logger_; }
 
     public:
-        static boost::shared_ptr<Engine> instance();
+        static Engine *instance();
         static void Init(std::string managerURL, std::string module, std::string secret);
         void start();
+        void release();
         ~Engine();
-
-    public:
-        void natsPublish(std::string subject, const char *data, int len);
         boost::shared_ptr<scyna_proto::Response> natsRequest(std::string subject, const scyna_proto::Request &request);
 
     private:
-        static boost::shared_ptr<Engine> instance_;
+        static Engine *instance_;
         Engine(std::string module, uint64_t sid, const scyna_proto::Configuration &config);
     };
 }
