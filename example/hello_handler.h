@@ -5,6 +5,7 @@ class HelloHandler : public scyna::Endpoint::Handler<PROTO::HelloRequest>
 {
     const scyna::Error *execute() override
     {
+        LOG_INFO("Receive HelloRequest")
         PROTO::HelloResponse response;
         response.set_content("Hello " + request.name());
         std::cout << "Request:" << request.name() << std::endl;

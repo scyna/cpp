@@ -20,6 +20,7 @@ scyna::Engine::Engine(std::string module, uint64_t sid, const scyna_proto::Confi
     this->module_ = module;
     this->session_ = boost::make_shared<Session>(sid);
     this->id_ = boost::make_shared<Generator>();
+    this->logger_ = boost::make_shared<Logger>(sid, true);
 
     std::cout << "NATS URL:" << config.natsurl() << std::endl;
 
