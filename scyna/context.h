@@ -19,10 +19,12 @@ namespace scyna
     };
 }
 
-#define ctxINFO(message) context->write(__FILE__, __LINE__, scyna::Logger::INFO, message)
-#define ctxDEBUG(message) context->write(__FILE__, __LINE__, scyna::Logger::DEBUG, message)
-#define ctxERROR(message) context->write(__FILE__, __LINE__, scyna::Logger::ERROR, message)
-#define ctxWARNING(message) context->write(__FILE__, __LINE__, scyna::Logger::WARNING, message)
-#define ctxFATAL(message) context->write(__FILE__, __LINE__, scyna::Logger::FATAL, message)
+#define _CONTEXT_LOG_(level, message) _LOG_(context, level, message)
+
+#define ctxINFO(message) _CONTEXT_LOG_(scyna::Logger::INFO, message)
+#define ctxDEBUG(message) _CONTEXT_LOG_(scyna::Logger::DEBUG, message)
+#define ctxERROR(message) _CONTEXT_LOG_(scyna::Logger::ERROR, message)
+#define ctxWARNING(message) _CONTEXT_LOG_(scyna::Logger::WARNING, message)
+#define ctxFATAL(message) _CONTEXT_LOG_(scyna::Logger::FATAL, message)
 
 #endif

@@ -22,9 +22,14 @@ void scyna::Logger::add(uint level, std::string messgage)
     }
 }
 
-void scyna::Logger::write(const char *file, int line, uint level, const char *message)
+void scyna::Logger::print(const char *file, int line, uint level, const char *message)
 {
     char buffer[1024] = {0};
     int len = std::snprintf(buffer, sizeof(buffer), "%s(%d) : %s", file, line, message);
     this->add(level, std::string(buffer, len));
+}
+
+void scyna::Logger::printf(const char *file, int line, uint level, const char *format, ...)
+{
+    /* TODO */
 }
