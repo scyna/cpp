@@ -3,6 +3,9 @@
 #include <boost/make_shared.hpp>
 #include <curl/curl.h>
 #include "path.h"
+#include "session.h"
+#include "generator.h"
+#include "logger.h"
 
 boost::shared_ptr<scyna::Engine> scyna::Engine::instance_;
 

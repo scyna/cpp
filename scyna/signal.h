@@ -4,6 +4,7 @@
 #include <google/protobuf/message.h>
 #include "base_handler.h"
 #include "engine.h"
+#include "utils.h"
 
 namespace scyna
 {

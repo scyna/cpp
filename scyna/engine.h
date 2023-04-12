@@ -4,13 +4,14 @@
 #include <boost/make_shared.hpp>
 #include <nats/nats.h>
 #include "proto/generated/engine.pb.h"
-
-#include "session.h"
-#include "generator.h"
-#include "logger.h"
+#include "proto/generated/scyna.pb.h"
 
 namespace scyna
 {
+    class Session;
+    class Generator;
+    class Logger;
+
     class Engine
     {
     private:

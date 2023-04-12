@@ -3,6 +3,8 @@
 
 #include <string>
 #include "engine.h"
+#include "session.h"
+#include "utils.h"
 #include "error.h"
 #include "base_handler.h"
 #include <google/protobuf/util/json_util.h>
