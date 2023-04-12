@@ -6,6 +6,7 @@
 #include "session.h"
 #include "generator.h"
 #include "logger.h"
+#include "setting.h"
 
 scyna::Engine *scyna::Engine::instance_;
 
@@ -101,6 +102,8 @@ void scyna::Engine::Init(std::string managerURL, std::string module, std::string
             {
                 instance_ = new Engine(module, (uint64_t)response.sessionid(), response.config());
                 std::cerr << "Engine created, session:" << response.sessionid() << std::endl;
+                Signal::Register<SettingUpdatedHandler>(Path::SETTING_UPDATE_CHANNEL, Signal::SCOPE_SESSION);
+                Signal::Register<SettingRemovedHandler>(Path::SETTING_REMOVE_CHANNEL, Signal::SCOPE_SESSION);
             }
         }
 
