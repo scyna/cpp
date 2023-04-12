@@ -1,7 +1,7 @@
 #include "logger.h"
 #include "signal.h"
 
-scyna::Logger::Logger(uint64_t id, bool session = false)
+scyna::Logger::Logger(uint64_t id, bool session)
 {
     this->id_ = id;
     this->session_ = session;

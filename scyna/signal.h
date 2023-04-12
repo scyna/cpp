@@ -3,6 +3,7 @@
 
 #include <google/protobuf/message.h>
 #include "base_handler.h"
+#include "engine.h"
 
 namespace scyna
 {
@@ -41,7 +42,7 @@ namespace scyna
             auto nc = engine->connection();
 
             natsSubscription *sub = NULL;
-            auto status = natsConnection_QueueSubscribe(&sub, nc, Utils::subscribeUrl(url).c_str(), engine->module(), scyna::_onMessageReceived_, handler);
+            auto status = natsConnection_QueueSubscribe(&sub, nc, Utils::subscribeUrl(channel).c_str(), engine->module(), scyna::_onMessageReceived_, handler);
 
             if (status == NATS_OK)
             {

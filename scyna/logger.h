@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 #include "proto/generated/engine.pb.h"
-#include "engine.h"
 #include "path.h"
 
 namespace scyna
@@ -18,6 +17,7 @@ namespace scyna
         const uint FATAL = 5;
         uint64_t id_;
         bool session_;
+        void add(uint level, std::string messgage);
 
     public:
         Logger(uint64_t id, bool session = false);
