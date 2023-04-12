@@ -19,7 +19,6 @@ namespace scyna
         {
         }
     };
-
 }
 
 #endif
