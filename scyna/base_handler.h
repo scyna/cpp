@@ -4,6 +4,7 @@
 #include <string>
 #include <google/protobuf/util/json_util.h>
 #include <nats/nats.h>
+#include "context.h"
 
 namespace scyna
 {
@@ -11,6 +12,7 @@ namespace scyna
     {
     protected:
         natsSubscription *subscription_;
+        Context *context = new Context(0);
 
     public:
         virtual void onMessageReceived(natsConnection *nc, natsMsg *msg) = 0;
@@ -26,6 +28,7 @@ namespace scyna
                 natsSubscription_Unsubscribe(subscription_);
                 natsSubscription_Destroy(subscription_);
             }
+            delete context;
         }
     };
 

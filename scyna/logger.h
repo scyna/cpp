@@ -17,7 +17,7 @@ namespace scyna
         static const uint DEBUG = 4;
         static const uint FATAL = 5;
 
-    private:
+    protected:
         uint64_t id_;
         bool session_;
         void add(uint level, std::string messgage);

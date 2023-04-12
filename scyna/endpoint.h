@@ -65,6 +65,7 @@ namespace scyna
 
                 this->json_ = req.json();
                 this->source_ = req.data();
+                this->context->reset(req.traceid());
 
                 if (json_)
                 {

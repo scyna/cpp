@@ -4,6 +4,7 @@
 #include <google/protobuf/message.h>
 #include "base_handler.h"
 #include "engine.h"
+#include "generator.h"
 #include "utils.h"
 
 namespace scyna
@@ -25,6 +26,7 @@ namespace scyna
         private:
             void onMessageReceived(natsConnection *nc, natsMsg *msg) override
             {
+                context->reset(Engine::instance()->ID()->next());
                 if (!data.ParseFromArray(natsMsg_GetData(msg), natsMsg_GetDataLength(msg)))
                 {
                     std::cerr << "Can not parse signal data" << std::endl;

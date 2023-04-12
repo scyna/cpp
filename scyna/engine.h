@@ -16,17 +16,17 @@ namespace scyna
     {
     private:
         std::string module_;
-        boost::shared_ptr<Session> session_;
-        boost::shared_ptr<Generator> id_;
+        Session *session_;
+        Generator *id_;
         natsConnection *connection_ = NULL;
-        boost::shared_ptr<Logger> logger_;
+        Logger *logger_;
 
     public:
-        boost::shared_ptr<Generator> ID() { return id_; }
+        Generator *ID() { return id_; }
         std::string module() { return module_; }
-        boost::shared_ptr<Session> session() { return session_; }
+        Session *session() { return session_; }
         natsConnection *connection() { return connection_; }
-        boost::shared_ptr<Logger> logger() { return logger_; }
+        Logger *logger() { return logger_; }
 
     public:
         static boost::shared_ptr<Engine> instance();

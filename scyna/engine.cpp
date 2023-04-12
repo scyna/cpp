@@ -18,9 +18,9 @@ size_t writefunc(void *ptr, size_t size, size_t nmemb, std::string *s)
 scyna::Engine::Engine(std::string module, uint64_t sid, const scyna_proto::Configuration &config)
 {
     this->module_ = module;
-    this->session_ = boost::make_shared<Session>(sid);
-    this->id_ = boost::make_shared<Generator>();
-    this->logger_ = boost::make_shared<Logger>(sid, true);
+    this->session_ = new Session(sid);
+    this->id_ = new Generator();
+    this->logger_ = new Logger(sid, true);
 
     std::cout << "NATS URL:" << config.natsurl() << std::endl;
 
@@ -39,6 +39,9 @@ scyna::Engine::~Engine()
     {
         natsConnection_Destroy(connection_);
     }
+    delete session_;
+    delete id_;
+    delete logger_;
 }
 
 boost::shared_ptr<scyna::Engine> scyna::Engine::instance()
