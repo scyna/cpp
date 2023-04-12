@@ -29,7 +29,7 @@ namespace scyna
         }
     };
 
-    void _onMessageReceived_(natsConnection *nc, natsSubscription *sub, natsMsg *msg, void *closure)
+    static void _onMessageReceived_(natsConnection *nc, natsSubscription *sub, natsMsg *msg, void *closure)
     {
         auto handler = (scyna::BaseHandler *)closure;
         handler->onMessageReceived(nc, msg);

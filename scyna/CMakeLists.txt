@@ -1,4 +1,4 @@
-FILE(GLOB ScynaSources *.cpp proto/generated/*.cc) 
+FILE(GLOB ScynaSources *.cpp proto/generated/*.cc)
 add_library(scyna ${ScynaSources})
 
 target_link_libraries(scyna

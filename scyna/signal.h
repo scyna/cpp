@@ -10,6 +10,12 @@ namespace scyna
 {
     namespace Signal
     {
+        enum Scope
+        {
+            SCOPE_MODULE = 1,
+            SCOPE_SESSION = 2
+        };
+
         template <typename T>
         class Handler : public scyna::BaseHandler
         {
@@ -31,10 +37,15 @@ namespace scyna
             virtual void execute() = 0;
         };
 
-        static void Emit(std::string channel, const google::protobuf::Message &m);
+        static void Emit(std::string channel, const google::protobuf::Message &m)
+        {
+            auto nc = Engine::instance()->connection();
+            auto result = m.SerializeAsString();
+            natsConnection_Publish(nc, channel.c_str(), (const void *)result.c_str(), result.length());
+        }
 
         template <typename H>
-        static void Register(std::string channel)
+        static void Register(std::string channel, Scope scope = SCOPE_MODULE)
         {
             std::cout << "Register Signal:" << channel << std::endl;
 
@@ -43,7 +54,15 @@ namespace scyna
             auto nc = engine->connection();
 
             natsSubscription *sub = NULL;
-            auto status = natsConnection_QueueSubscribe(&sub, nc, Utils::subscribeUrl(channel).c_str(), engine->module(), scyna::_onMessageReceived_, handler);
+            natsStatus status = NATS_ERR;
+            if (scope == SCOPE_MODULE)
+            {
+                status = natsConnection_QueueSubscribe(&sub, nc, Utils::subscribeUrl(channel).c_str(), engine->module().c_str(), scyna::_onMessageReceived_, handler);
+            }
+            else if (scope == SCOPE_SESSION)
+            {
+                status = natsConnection_Subscribe(&sub, nc, Utils::subscribeUrl(channel).c_str(), scyna::_onMessageReceived_, handler);
+            }
 
             if (status == NATS_OK)
             {

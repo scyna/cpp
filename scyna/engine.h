@@ -26,7 +26,7 @@ namespace scyna
         std::string module() { return module_; }
         boost::shared_ptr<Session> session() { return session_; }
         natsConnection *connection() { return connection_; }
-        boost::shared_ptr<Logger> LOG() { return logger_; }
+        boost::shared_ptr<Logger> logger() { return logger_; }
 
     public:
         static boost::shared_ptr<Engine> instance();

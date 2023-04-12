@@ -29,14 +29,14 @@ namespace scyna
         }
     };
 
-    const Error *OK = Error::New(0, "Success");
-    const Error *SERVER_ERROR = Error::New(1, "Server Error");
-    const Error *BAD_REQUEST = Error::New(2, "Bad Request");
-    const Error *PERMISSION_ERROR = Error::New(4, "Permission Error");
-    const Error *REQUEST_INVALID = Error::New(5, "Request Invalid");
-    const Error *MODULE_NOT_EXIST = Error::New(6, "Module Not Exist");
-    const Error *BAD_DATA = Error::New(7, "Bad Data");
-    const Error *STREAM_ERROR = Error::New(8, "Stream Error");
+    static const Error *OK = Error::New(0, "Success");
+    static const Error *SERVER_ERROR = Error::New(1, "Server Error");
+    static const Error *BAD_REQUEST = Error::New(2, "Bad Request");
+    static const Error *PERMISSION_ERROR = Error::New(4, "Permission Error");
+    static const Error *REQUEST_INVALID = Error::New(5, "Request Invalid");
+    static const Error *MODULE_NOT_EXIST = Error::New(6, "Module Not Exist");
+    static const Error *BAD_DATA = Error::New(7, "Bad Data");
+    static const Error *STREAM_ERROR = Error::New(8, "Stream Error");
 
 } // namespace scyna
 
