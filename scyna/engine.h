@@ -22,11 +22,11 @@ namespace scyna
         Logger *logger_ = NULL;
 
     public:
-        Generator *ID() { return id_; }
-        std::string module() { return module_; }
-        Session *session() { return session_; }
-        natsConnection *connection() { return connection_; }
-        Logger *logger() { return logger_; }
+        static Generator *ID() { return instance_->id_; }
+        static std::string Module() { return instance_->module_; }
+        static uint64_t SessionID();
+        static natsConnection *Connection() { return instance_->connection_; }
+        static Logger *LOG() { return instance_->logger_; }
 
     public:
         static Engine *instance();

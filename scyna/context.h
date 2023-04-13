@@ -19,7 +19,7 @@ namespace scyna
     };
 }
 
-#define _CONTEXT_LOG_(level, message) _LOG_(context, level, message)
+#define _CONTEXT_LOG_(level, message) _TRACE_(context, level, message)
 
 #define ctxINFO(message) _CONTEXT_LOG_(scyna::Logger::INFO, message)
 #define ctxDEBUG(message) _CONTEXT_LOG_(scyna::Logger::DEBUG, message)

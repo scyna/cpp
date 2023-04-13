@@ -19,7 +19,7 @@ size_t writefunc(void *ptr, size_t size, size_t nmemb, std::string *s)
 scyna::Engine::Engine(std::string module, uint64_t sid, const scyna_proto::Configuration &config)
 {
     this->module_ = module;
-    this->session_ = new Session(sid);
+    this->session_ = new scyna::Session(sid);
     this->id_ = new Generator();
     this->logger_ = new Logger(sid, true);
 
@@ -105,8 +105,8 @@ void scyna::Engine::Init(std::string managerURL, std::string module, std::string
             {
                 instance_ = new Engine(module, (uint64_t)response.sessionid(), response.config());
                 std::cerr << "Engine created, session:" << response.sessionid() << std::endl;
-                Signal::Register<SettingUpdatedHandler>(Path::SETTING_UPDATE_CHANNEL + Engine::instance()->module(), Signal::SCOPE_SESSION);
-                Signal::Register<SettingRemovedHandler>(Path::SETTING_REMOVE_CHANNEL + Engine::instance()->module(), Signal::SCOPE_SESSION);
+                Signal::Register<SettingUpdatedHandler>(Path::SETTING_UPDATE_CHANNEL + Engine::Module(), Signal::SCOPE_SESSION);
+                Signal::Register<SettingRemovedHandler>(Path::SETTING_REMOVE_CHANNEL + Engine::Module(), Signal::SCOPE_SESSION);
             }
         }
 
@@ -159,4 +159,9 @@ boost::shared_ptr<scyna_proto::Response> scyna::Engine::natsRequest(std::string 
     }
 
     return nullptr;
+}
+
+uint64_t scyna::Engine::SessionID()
+{
+    return instance_->session_->ID();
 }

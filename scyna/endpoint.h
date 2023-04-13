@@ -30,7 +30,7 @@ namespace scyna
             {
                 scyna_proto::Response response;
                 response.set_code(code);
-                response.set_sessionid(Engine::instance()->session()->ID());
+                response.set_sessionid(Engine::SessionID());
 
                 if (json_)
                 {
@@ -122,7 +122,7 @@ namespace scyna
         {
             H *handler = new H();
             std::cout << "Register Service:" << url << std::endl;
-            auto nc = Engine::instance()->connection();
+            auto nc = Engine::Connection();
 
             natsSubscription *sub = NULL;
             auto status = natsConnection_QueueSubscribe(&sub, nc, Utils::subscribeUrl(url).c_str(), "API", scyna::_onMessageReceived_, handler);

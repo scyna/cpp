@@ -10,6 +10,7 @@ namespace scyna
     {
         void execute() override
         {
+            /* TODO */
         }
     };
 
@@ -17,6 +18,7 @@ namespace scyna
     {
         void execute() override
         {
+            /* TODO */
         }
     };
 }

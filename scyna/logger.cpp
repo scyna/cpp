@@ -7,7 +7,7 @@ scyna::Logger::Logger(uint64_t id, bool session)
     this->session_ = session;
 }
 
-void scyna::Logger::add(uint level, std::string messgage)
+void scyna::Logger::print(uint level, std::string messgage)
 {
     std::cout << messgage << std::endl;
     if (id_ > 0)
@@ -22,14 +22,9 @@ void scyna::Logger::add(uint level, std::string messgage)
     }
 }
 
-void scyna::Logger::print(const char *file, int line, uint level, const char *message)
+void scyna::Logger::trace(const char *file, int line, uint level, const char *message)
 {
-    char buffer[1024] = {0};
-    int len = std::snprintf(buffer, sizeof(buffer), "%s(%d) : %s", file, line, message);
-    this->add(level, std::string(buffer, len));
-}
-
-void scyna::Logger::printf(const char *file, int line, uint level, const char *format, ...)
-{
-    /* TODO */
+    std::ostringstream stream;
+    stream << file << "(" << line << ") : " << message;
+    this->print(level, stream.str());
 }

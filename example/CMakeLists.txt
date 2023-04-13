@@ -8,3 +8,5 @@ target_link_libraries(example
     curl
     scyna
 )
+
+target_compile_features(example PRIVATE cxx_std_17)

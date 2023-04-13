@@ -41,7 +41,7 @@ namespace scyna
 
         static void Emit(std::string channel, const google::protobuf::Message &m)
         {
-            auto nc = Engine::instance()->connection();
+            auto nc = Engine::Connection();
             auto result = m.SerializeAsString();
             natsConnection_Publish(nc, channel.c_str(), (const void *)result.c_str(), result.length());
         }
@@ -52,14 +52,13 @@ namespace scyna
             std::cout << "Register Signal:" << channel << std::endl;
 
             H *handler = new H();
-            auto engine = Engine::instance();
-            auto nc = engine->connection();
+            auto nc = Engine::Connection();
 
             natsSubscription *sub = NULL;
             natsStatus status = NATS_ERR;
             if (scope == SCOPE_MODULE)
             {
-                status = natsConnection_QueueSubscribe(&sub, nc, channel.c_str(), engine->module().c_str(), scyna::_onMessageReceived_, handler);
+                status = natsConnection_QueueSubscribe(&sub, nc, channel.c_str(), Engine::Module().c_str(), scyna::_onMessageReceived_, handler);
             }
             else if (scope == SCOPE_SESSION)
             {

@@ -8,3 +8,5 @@ target_link_libraries(scyna
     nats
     curl
 )
+
+target_compile_features(scyna PRIVATE cxx_std_17)
