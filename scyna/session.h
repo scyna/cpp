@@ -26,7 +26,6 @@ namespace scyna
             this->sequence_ = 1;
         }
     };
-
 }
 
 #endif

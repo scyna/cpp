@@ -11,11 +11,11 @@ namespace scyna
     public:
         Context(uint64_t id);
         void reset(uint64_t id) { this->id_ = id; }
-        void sendRequest();
-        void scheduleTask();
-        void tag();
-        void publishEvent();
-        void raiseEvent();
+        // void sendRequest();
+        // void scheduleTask();
+        // void tag();
+        // void publishEvent();
+        // void raiseEvent();
     };
 }
 
