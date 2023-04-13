@@ -27,6 +27,7 @@ scyna::Engine::Engine(std::string module, uint64_t sid, const scyna_proto::Confi
 
     natsOptions *opt = NULL;
 
+    /* TODO */
     // natsOptions_Create(&otp);
     // natsOptions_SetServers(&opt,)
 
@@ -61,6 +62,8 @@ void scyna::Engine::release()
         delete logger_;
         logger_ = NULL;
     }
+
+    /* TODO: handlers*/
 }
 
 scyna::Engine *scyna::Engine::instance()
@@ -102,8 +105,8 @@ void scyna::Engine::Init(std::string managerURL, std::string module, std::string
             {
                 instance_ = new Engine(module, (uint64_t)response.sessionid(), response.config());
                 std::cerr << "Engine created, session:" << response.sessionid() << std::endl;
-                Signal::Register<SettingUpdatedHandler>(Path::SETTING_UPDATE_CHANNEL, Signal::SCOPE_SESSION);
-                Signal::Register<SettingRemovedHandler>(Path::SETTING_REMOVE_CHANNEL, Signal::SCOPE_SESSION);
+                Signal::Register<SettingUpdatedHandler>(Path::SETTING_UPDATE_CHANNEL + Engine::instance()->module(), Signal::SCOPE_SESSION);
+                Signal::Register<SettingRemovedHandler>(Path::SETTING_REMOVE_CHANNEL + Engine::instance()->module(), Signal::SCOPE_SESSION);
             }
         }
 

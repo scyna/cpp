@@ -59,11 +59,11 @@ namespace scyna
             natsStatus status = NATS_ERR;
             if (scope == SCOPE_MODULE)
             {
-                status = natsConnection_QueueSubscribe(&sub, nc, Utils::subscribeUrl(channel).c_str(), engine->module().c_str(), scyna::_onMessageReceived_, handler);
+                status = natsConnection_QueueSubscribe(&sub, nc, channel.c_str(), engine->module().c_str(), scyna::_onMessageReceived_, handler);
             }
             else if (scope == SCOPE_SESSION)
             {
-                status = natsConnection_Subscribe(&sub, nc, Utils::subscribeUrl(channel).c_str(), scyna::_onMessageReceived_, handler);
+                status = natsConnection_Subscribe(&sub, nc, channel.c_str(), scyna::_onMessageReceived_, handler);
             }
 
             if (status == NATS_OK)
