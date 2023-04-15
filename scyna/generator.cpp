@@ -8,7 +8,7 @@ bool scyna::Generator::getID_()
     request.set_json(false);
     request.set_traceid(0);
 
-    auto engine = Engine::instance();
+    auto engine = Engine::Instance();
 
     auto response = engine->natsRequest(Utils::publishUrl(Path::GEN_GET_ID_URL), request);
 

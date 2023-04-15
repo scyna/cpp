@@ -29,10 +29,10 @@ namespace scyna
         static Logger *LOG() { return instance_->logger_; }
 
     public:
-        static Engine *instance();
+        static Engine *Instance();
         static void Init(std::string managerURL, std::string module, std::string secret);
-        void start();
-        void release();
+        void Start();
+        void Release();
         ~Engine();
         boost::shared_ptr<scyna_proto::Response> natsRequest(std::string subject, const scyna_proto::Request &request);
 

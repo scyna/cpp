@@ -27,7 +27,7 @@ bool scyna::Setting::load_(std::string key, std::string &value)
 
 bool scyna::Setting::set(std::string key, std::string value)
 {
-    auto engine = Engine::instance();
+    auto engine = Engine::Instance();
     scyna_proto::WriteSettingRequest request;
     request.set_key(key);
     request.set_module(Engine::Module());
@@ -49,7 +49,7 @@ bool scyna::Setting::get(std::string key, std::string &value)
         return true;
     }
 
-    auto engine = Engine::instance();
+    auto engine = Engine::Instance();
     scyna_proto::ReadSettingRequest request;
     request.set_key(key);
     request.set_module(Engine::Module());
@@ -67,7 +67,7 @@ bool scyna::Setting::get(std::string key, std::string &value)
 
 bool scyna::Setting::remove(std::string key)
 {
-    auto engine = Engine::instance();
+    auto engine = Engine::Instance();
     scyna_proto::RemoveSettingRequest request;
     request.set_key(key);
     request.set_module(Engine::Module());

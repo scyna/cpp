@@ -37,10 +37,10 @@ scyna::Engine::Engine(std::string module, uint64_t sid, const scyna_proto::Confi
 
 scyna::Engine::~Engine()
 {
-    this->release();
+    this->Release();
 }
 
-void scyna::Engine::release()
+void scyna::Engine::Release()
 {
     if (connection_ != NULL)
     {
@@ -66,7 +66,7 @@ void scyna::Engine::release()
     /* TODO: handlers*/
 }
 
-scyna::Engine *scyna::Engine::instance()
+scyna::Engine *scyna::Engine::Instance()
 {
     return instance_;
 }
@@ -127,7 +127,7 @@ void scyna_about_to_exit_handler(int s)
     exit(1);
 }
 
-void scyna::Engine::start()
+void scyna::Engine::Start()
 {
     struct sigaction sigIntHandler;
     sigIntHandler.sa_handler = scyna_about_to_exit_handler;
