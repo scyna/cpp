@@ -10,7 +10,7 @@ bool scyna::Generator::getID_()
 
     auto engine = Engine::Instance();
 
-    auto response = engine->natsRequest(Utils::publishUrl(Path::GEN_GET_ID_URL), request);
+    auto response = engine->NatsRequest(Utils::publishUrl(Path::GEN_GET_ID_URL), request);
 
     if (response == nullptr)
     {

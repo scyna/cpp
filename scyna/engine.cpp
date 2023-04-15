@@ -137,7 +137,7 @@ void scyna::Engine::Start()
     pause();
 }
 
-boost::shared_ptr<scyna_proto::Response> scyna::Engine::natsRequest(std::string subject, const scyna_proto::Request &request)
+boost::shared_ptr<scyna_proto::Response> scyna::Engine::NatsRequest(std::string subject, const scyna_proto::Request &request)
 {
     natsMsg *reply = NULL;
     auto data = request.SerializeAsString();
