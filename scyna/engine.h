@@ -36,6 +36,23 @@ namespace scyna
         ~Engine();
         boost::shared_ptr<scyna_proto::Response> natsRequest(std::string subject, const scyna_proto::Request &request);
 
+        template <typename REQUEST, typename RESPONSE>
+        boost::shared_ptr<RESPONSE> sendRequest(std::string subject, const REQUEST &request)
+        {
+            scyna_proto::Request req;
+            req.set_json(false);
+            req.set_traceid(0);
+            req.set_body(request.SerializeAsString());
+            auto res = natsRequest(subject, req);
+            if (res != nullptr && res->code() == 200)
+            {
+                auto ret = boost::make_shared<RESPONSE>();
+                ret->ParseFromString(res->body());
+                return ret;
+            }
+            return nullptr;
+        }
+
     private:
         static Engine *instance_;
         Engine(std::string module, uint64_t sid, const scyna_proto::Configuration &config);
