@@ -18,7 +18,7 @@ namespace scyna
         boost::mutex mutex_;
 
     public:
-        uint64_t next();
+        uint64_t Next();
 
     private:
         bool getID_();

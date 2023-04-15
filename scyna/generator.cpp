@@ -29,7 +29,7 @@ bool scyna::Generator::getID_()
     return true;
 }
 
-uint64_t scyna::Generator::next()
+uint64_t scyna::Generator::Next()
 {
     boost::lock_guard<boost::mutex> guard(mutex_);
     if (value_ < end_)

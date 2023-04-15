@@ -26,7 +26,7 @@ namespace scyna
         private:
             void onMessageReceived(natsConnection *nc, natsMsg *msg) override
             {
-                context->reset(Engine::Instance()->ID()->next());
+                context->reset(Engine::Instance()->ID()->Next());
                 if (!data.ParseFromArray(natsMsg_GetData(msg), natsMsg_GetDataLength(msg)))
                 {
                     std::cerr << "Can not parse signal data" << std::endl;
