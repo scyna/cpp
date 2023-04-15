@@ -6,6 +6,10 @@
 
 namespace scyna
 {
+    class Setting
+    {
+    };
+
     class SettingUpdatedHandler : public Signal::Handler<scyna_proto::SettingUpdatedSignal>
     {
         void execute() override
